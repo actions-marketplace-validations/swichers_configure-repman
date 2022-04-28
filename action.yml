@@ -1,5 +1,10 @@
 name: 'Configure Repman'
 description: 'A GitHub action for configuring composer to use Repman.'
+
+branding:
+  icon: git-branch
+  color: yellow
+
 inputs:
   token:
     description: 'Repman access token'
