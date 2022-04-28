@@ -1,0 +1,20 @@
+name: 'Configure Repman'
+description: 'A GitHub action for configuring composer to use Repman.'
+inputs:
+  token:
+    description: 'Repman access token'
+    required: true
+    default: undefined
+  organization:
+    description: 'Repman organization URL'
+    required: true
+    default: undefined
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure composer
+      shell: bash
+      run: |
+        composer config -g 'http-basic.${{ inputs.organization }}.repo.repman.io' token '${{ inputs.token }}'
+        composer config -g 'repo.${{ inputs.organization }}' composer 'https://${{ inputs.organization }}.repo.repman.io'
+        echo "$COMPOSER_AUTH" > $GITHUB_WORKSPACE/auth.json
